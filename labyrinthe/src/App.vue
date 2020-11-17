@@ -1,19 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="./assets/logo.png" />
+
+    <h1>Minautorus</h1>
+    <h3>Labyrinthe for life</h3>
+    <Labyrinth_select
+      :labyrinth_data="labyrinth_data"
+      @labyrinth_chosen="labyrinthChosen"
+    />
+    <Labyrinth :labyrinth_data="selected_labyrinth" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import labyrinthData from "./static/labyrinthes.json";
+import Labyrinth_select from "./components/Labyrinth_select";
+import Labyrinth from "./components/Labyrinth.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Labyrinth_select,
+    Labyrinth,
+  },
+
+  data() {
+    return {
+      labyrinth_data: labyrinthData,
+      selected_labyrinth: [],
+    };
+  },
+
+  methods: {
+    labyrinthChosen: function(labyrinth) {
+      this.selected_labyrinth = labyrinth;
+    },
+  },
+};
 </script>
 
 <style>
